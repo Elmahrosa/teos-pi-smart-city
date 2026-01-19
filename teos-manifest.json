@@ -1,0 +1,10 @@
+﻿{
+    "status":  "development",
+    "governance":  {
+                       "framework":  "TEOS-FORGE-GLOBAL",
+                       "compliance_standard":  "Universal-DPI"
+                   },
+    "project":  "Teos-Pi-Smart-City",
+    "version":  "1.0.0",
+    "organization":  "Elmahrosa"
+}
