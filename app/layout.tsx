@@ -5,16 +5,16 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Elmahrosa Smart City | Alexandria Civic Vision",
-  description: "A community-built civic smart city concept in Alexandria, Egypt. Demo experience for Pi Next Hackathon 2026; no land sale or investment offer.",
+  description: "A community-built civic smart city platform in Alexandria, Egypt. Built for Pi Network - no land sale or investment offer.",
   applicationName: "Elmahrosa Smart City",
   metadataBase: new URL("https://teos-pi-smart-city.vercel.app"),
   openGraph: {
     title: "Elmahrosa Smart City — Alexandria Civic Vision",
-    description: "A community-led civic concept for Alexandria. Clearly labeled demo and sandbox experience.",
+    description: "A community-led civic platform for Alexandria on Pi Network.",
     type: "website",
     images: ["/icon.svg"],
   },
-  twitter: { card: "summary", title: "Elmahrosa Smart City", description: "Alexandria civic vision · Demo & sandbox" },
+  twitter: { card: "summary", title: "Elmahrosa Smart City", description: "Alexandria civic vision on Pi Network" },
   icons: { icon: "/icon.svg" },
 }
 
@@ -26,3 +26,4 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   )
 }
+

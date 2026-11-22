@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 
-/** No contributions are accepted or recorded by this demo endpoint. */
+/** Contributions endpoint - connect payment processing before enabling. */
 export async function POST() {
   return NextResponse.json(
-    { error: "Sandbox Mode — No real Pi charged. Contributions and land/share purchases are not available." },
-    { status: 410 },
+    { error: "Contributions are not available yet. No land sale or share sale is offered." },
+    { status: 503 },
   )
 }

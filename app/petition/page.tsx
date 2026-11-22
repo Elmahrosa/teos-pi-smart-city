@@ -7,11 +7,11 @@ export default function PetitionPage() {
         <a className="button button-outline" href="/">← Back to the vision</a>
         <div className="petition-card" style={{ marginTop: 24 }}>
           <div>
-            <span className="eyebrow">DEMO · TESTNET SANDBOX</span>
-            <h1>Egypt Crypto Regulation Petition <span className="demo-chip">Demo</span></h1>
-            <p>This page illustrates a civic petition concept only. No official petition, signature count, or campaign status is represented here.</p>
-            <p>Sandbox Mode — No real Pi charged. No land sale, shares, or promises of profit or returns.</p>
-            <Link className="button button-gold" href="/#petition">View the sandbox simulation</Link>
+            <span className="eyebrow">PI NETWORK · CIVIC PETITION</span>
+            <h1>Egypt Crypto Regulation Petition</h1>
+            <p>A civic petition concept for community support and transparent participation.</p>
+            <p>No land sale, shares, or promises of profit or returns.</p>
+            <Link className="button button-gold" href="/#petition">Support the petition</Link>
           </div>
         </div>
       </section>
