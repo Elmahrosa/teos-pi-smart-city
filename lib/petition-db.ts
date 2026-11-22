@@ -6,7 +6,7 @@ const petitions: Petition[] = [
     id: "petition-001",
     title: "Approve Land Acquisition in Alexandria Downtown",
     description:
-      "Petition to approve the acquisition of 110 acres (445,000 m²) in Alexandria downtown for the Teos&Pi Smart City project.",
+      "Petition to approve the a civic smart city concept in Alexandria, Egypt for the Teos&Pi Smart City project (sandbox demo — no land sale).",
     category: "governance",
     createdBy: "pioneer-001",
     createdAt: new Date("2025-01-15"),

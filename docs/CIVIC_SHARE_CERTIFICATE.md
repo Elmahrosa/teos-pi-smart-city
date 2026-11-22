@@ -27,7 +27,7 @@ This certificate confirms that the above pioneer has:
 
 ### Share Allocation
 
-- **Region:** Alexandria Downtown (110 acres, 445,000 m²)
+- **Region:** Alexandria, Egypt (concept location — no land sale)
 - **Contribution Amount:** [amountPi] Pi
 - **Shares Allocated:** [amountPi ÷ 1000] shares
 - **Treasury Record Hash:** [ledger receiptHash]

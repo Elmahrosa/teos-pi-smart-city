@@ -141,7 +141,7 @@ export default function FounderDashboard() {
                 <Card className="p-6">
                   <h3 className="font-bold mb-4">Project Financials</h3>
                   <div className="space-y-3">
-                    <FinancialRow label="Land Value (110 acres, 445,000 m²)" value="$267M - $445M" />
+                    <FinancialRow label="Land Partnership (under study)" value="No land sale" />
                     <FinancialRow label="Construction Cost" value="$511M - $580M" />
                     <FinancialRow label="Total Project Cost" value="$800M - $1B" highlight />
                   </div>
@@ -219,7 +219,7 @@ export default function FounderDashboard() {
                   </span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mb-3">110 acres (445,000 m²) - Primary location</p>
+              <p className="text-sm text-muted-foreground mb-3">Alexandria, Egypt - Location under study (no land sale)</p>
               <Button
                 variant="outline"
                 size="sm"

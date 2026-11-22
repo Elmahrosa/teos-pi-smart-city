@@ -6,22 +6,11 @@
 
 ## 💰 Project Cost Analysis
 
-### Land Acquisition — Alexandria Downtown (Prime Location)
+### Land Partnership (Under Study)
 
-**Zone:** 110 acres (445,000 m²)
+**Status:** Land partnership under study — no land sale, no share sale, no investment offer.
 
-**Prime Downtown Price Range:**
-- Conservative Estimate: $3,200/m² × 445,000 m² = **$1,424,000,000 USD**
-- Mid-Range Estimate: $4,500/m² × 445,000 m² = **$2,002,500,000 USD**
-- Premium Estimate: $5,000/m² × 445,000 m² = **$2,225,000,000 USD**
-- Peak Estimate: $5,800/m² × 445,000 m² = **$2,581,000,000 USD**
-
-**Land Acquisition Cost: $1.42B–$2.58B USD**
-
-**Market Context:**
-- Prime zones (San Stefano, Corniche, Attarin): $3,200–$5,800/m²
-- Strategic value for civic smart city development
-- Government partnership potential for national infrastructure
+**Note:** Any land, valuation, or infrastructure figures require verified legal and financial documentation before publication.
 
 ---
 
@@ -145,7 +134,7 @@
 
 ### Strategic Value Proposition
 
-**"We are presenting a civic-first smart city model with a land valuation exceeding $2.2 billion USD, powered entirely by Pi Network. This project offers:**
+**"We are presenting a civic-first smart city sandbox concept, powered by Pi Network. This project explores:**
 
 - **Transparent governance** — Petition-first, blockchain-verified decisions
 - **Citizen ownership** — Every pioneer holds traceable civic shares
@@ -157,7 +146,7 @@
 
 ### Key Metrics for Officials
 
-- **Asset Value:** $1.42B–$2.58B USD (land alone)
+- **Status:** Sandbox concept — no valuation claims
 - **Economic Impact:** Multi-billion dollar civic economy
 - **Pioneer Participation:** Decentralized, globally accessible
 - **Compliance:** Egyptian law jurisdiction, Alexandria venue

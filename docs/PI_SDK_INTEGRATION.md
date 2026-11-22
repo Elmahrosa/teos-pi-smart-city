@@ -47,8 +47,8 @@ console.log('Payment created:', payment.identifier)
 \`\`\`typescript
 import { createCivicSharePayment } from '@/lib/pi-payments'
 
-// Purchase 5 civic shares (5,000 Pi)
-const payment = await createCivicSharePayment(userId, 5)
+// Example: civic share payment (sandbox only — no real Pi charged)
+const payment = await createCivicSharePayment(userId, 1)
 console.log('Civic share payment:', payment)
 \`\`\`
 

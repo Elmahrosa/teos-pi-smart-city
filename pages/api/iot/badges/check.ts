@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../../lib/auth';
-import { evaluateAllBadgeRules } from '../../../lib/iot/rules';
+import { authOptions } from '../../../../lib/auth';
+import { evaluateAllBadgeRules } from '../../../../lib/iot/rules';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions as any);

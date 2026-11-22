@@ -16,7 +16,7 @@ By signing this petition with **5 Pi** and contributing a minimum stake of **1,0
    All financial transactions within Teos&Pi Smart City are conducted exclusively in Pi. No external cryptocurrency swaps, bridges, or off-ramps are permitted.
 
 2. **Alexandria Civic Zone Participation**  
-   We support the acquisition and development of **110 acres (445,000 m²)** in Alexandria Downtown for the smart city project. Each **1,000 Pi contribution equals 1 civic share** (non-transferable outside Pi Network).
+   We support the acquisition and development of a civic smart city concept in Alexandria, Egypt. Contributions in sandbox mode are for demo purposes only — no real Pi charged, no land sale, no share sale.
 
 3. **Petition-First Governance**  
    We recognize that all major decisions require pioneer signatures and quorum approval through the petition system.

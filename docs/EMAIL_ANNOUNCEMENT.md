@@ -20,7 +20,7 @@ For 6+ years, I've been building civic infrastructure on Pi Network. Schools, ho
 
 Now we're in final talks for **117 acres of prime downtown Alexandria land** to launch the world's first fully Pi-governed smart city.
 
-Land value: **$2.2 billion USD**  
+Land partnership: **under study — no land sale or share sale**  
 Missing piece: **Legal regulatory framework**
 
 ### Current Status

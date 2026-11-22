@@ -3,7 +3,7 @@
 ## Current Status
 - Repository: **PRIVATE** ✅
 - Vercel Deployment: https://teos-pi-smart-city.vercel.app/ ✅
-- Project Value: **$2.2B+** (Updated) ✅
+- Project Status: **Sandbox civic demo for Pi Hackathon 2026** ✅
 
 ---
 
@@ -212,7 +212,7 @@ export async function authenticateWithPi() {
 ### Phase 4: Government Presentation (Week 4+)
 
 1. Share approved Pi app with Egyptian officials
-2. Present $2.2B+ valuation and governance model
+2. Present transparent sandbox governance model
 3. Demonstrate transparent treasury
 4. Propose pilot program for Alexandria
 
