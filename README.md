@@ -1,12 +1,12 @@
 # Elmahrosa Smart City
 
-Egypt's first Pi-powered civic platform. Report, sign, and build your city transparently.
+A community-built civic smart city concept in Alexandria, Egypt, prepared as a demo for Pi Next Hackathon 2026.
 
-## Demo and sandbox disclosure
-
-All figures and activity are **Demo data for Pi Next Hackathon**. The 5 Pi petition fee uses TESTNET SANDBOX simulation only. **Sandbox Mode — No real Pi will be charged yet**. The checkout does not call Pi.createPayment and cannot create a real Pi transaction.
+> **Demo Data for Pi Next Hackathon. Concept & Community Vision.** This project is not an operating city, land development, investment, or financial product. Land partnership under study — no land sale. No shares, profit, or returns are offered. **Sandbox Mode — No real Pi charged.**
 
 ## Run locally
+
+Requirements: Node.js 18.17+ and npm.
 
 ```bash
 npm install
@@ -15,24 +15,26 @@ npm run build
 npm start
 ```
 
+Open <http://localhost:3000>. The Pi SDK sign-in UI is available only in Pi Browser; outside it, the demo remains browseable. Petition support is a local UI simulation only. It never creates or submits a Pi transaction.
+
 ## Deploy to Vercel
 
-Import this GitHub repository in Vercel, keep the Next.js defaults, and deploy from `main`. No environment variables or database are required for the demo.
+Import `Elmahrosa/teos-pi-smart-city` in your Vercel account, select the Next.js preset, and deploy from `main`. No environment variables or database are required for the static demo. A repository update alone does not grant deployment access or verify a Vercel deployment; check the Vercel build logs after import.
 
-## Pi Browser
+## Pi Browser and Console
 
-The app loads `https://sdk.minepi.com/pi-sdk.js`, initializes Pi with `sandbox: true`, and requests only the `username` scope. Outside Pi Browser it stays usable and shows the Pi Browser guidance.
+Pi sign-in requests the `username` scope using the Pi Browser SDK in sandbox mode. Do not treat the UI payment simulation as a real or testnet transaction. Pi payment integration requires properly secured server-side approval/completion handlers, credentials stored as server secrets, and testing/approval through the Pi Developer Portal. This repository does not implement those handlers and must not be switched to Mainnet by changing a variable.
 
-Before real Testnet or Mainnet transactions: register the app in the Pi Developer Portal, implement server-side approval/completion endpoints, keep app credentials on the server, and never place secrets or wallet credentials in client code.
+Suggested Console details and submission checklist: [`docs/PI_CONSOLE_ASSETS.md`](docs/PI_CONSOLE_ASSETS.md).
 
-## Pi Console submission
+## Demo features
 
-- App name: Elmahrosa Smart City
-- Category: Utilities / Civic
-- Short description: A Pi-powered civic demo to report, sign, and build a better city.
-- Long description: Alexandria-inspired civic participation demo for petitions, governance, transparent tracking, community mapping, and pioneer badges. The 5 Pi petition action is a clearly labeled Testnet sandbox simulation and does not charge Pi. All content is demo data for Pi Next Hackathon 2026.
-- Screenshot 1: Home view with the Alexandria-inspired illustration and demo label.
-- Screenshot 2: Petition view with 5 Pi sandbox disclosure.
-- Screenshot 3: Governance, treasury, community map, and pioneer badge cards.
+- Arabic-first interface with English toggle
+- Concept districts, Alexandria map illustration, and phased vision
+- Session-only proposal voting and a local proposal-writing helper
+- Demo treasury disclosure and complimentary badge concept
+- No sale of land or shares, no financial claims, and no real payment processing
 
-Footer: Built in Alexandria, Egypt for Pi Next Hackathon 2026.
+## Security and environment
+
+Never commit `.env` files, API keys, Pi credentials, or deployment tokens. Use Vercel environment settings for private deployment secrets. The sandbox UI does not need secrets. Review your repository and Vercel settings before public submission.

@@ -1,194 +1,104 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { createPetitionPayment } from "@/lib/pi-payments"
-import { isPiBrowserAvailable } from "@/lib/pi-auth"
 
 type Language = "ar" | "en"
-type PiUser = { uid: string; username: string }
 
-const copy = {
-  ar: {
-    tagline: "منصة مصرية للمشاركة المدنية على Pi. أبلغ، وقّع، وابنِ مدينتك بشفافية.",
-    login: "تسجيل الدخول عبر Pi",
-    browser: "لأفضل تجربة، افتح هذا الموقع في Pi Browser. يمكنك استكشاف العرض التجريبي هنا.",
-    demo: "بيانات تجريبية لمسابقة Pi Next Hackathon",
-    sandbox: "وضع Sandbox — لن يتم خصم Pi حقيقي في الوقت الحالي",
-    petition: "عريضة تنظيم العملات الرقمية في مصر (عرض تجريبي)",
-    governance: "الحوكمة والعرائض",
-    treasury: "الخزينة (عرض تجريبي — تتبع شفاف)",
-    map: "الإسكندرية (خريطة مجتمعية تجريبية)",
-    badges: "شارات الرواد",
-    sign: "توقيع العريضة — 5 Pi تجريبية",
-    submit: "محاكاة دفع 5 Pi",
-    screenshots: "معاينة شاشات Pi Console",
-    screen1: "الرئيسية — نظرة على الخدمات المدنية وخريطة الإسكندرية التجريبية.",
-    screen2: "العريضة — توضيح رسوم 5 Pi في وضع Sandbox دون خصم حقيقي.",
-    screen3: "المجتمع — الحوكمة والخزينة التجريبية وشارات الرواد.",
-    foot: "صُنع في الإسكندرية، مصر من أجل Pi Next Hackathon 2026",
-    connected: "مرحباً",
-    unavailable: "افتح الموقع في Pi Browser لتسجيل الدخول باستخدام Pi.",
-    paymentDone: "تمت محاكاة الدفع التجريبي — لم يتم إنشاء معاملة Pi حقيقية.",
-    paymentError: "تعذرت محاكاة الدفع. حاول مرة أخرى.",
-    loading: "جارٍ التحضير…",
-  },
-  en: {
-    tagline: "Egypt's first Pi-powered civic platform. Report, sign, and build your city transparently.",
-    login: "Sign in with Pi",
-    browser: "For the full experience, open this site in Pi Browser. You can explore the demo here.",
-    demo: "Demo data for Pi Next Hackathon",
-    sandbox: "Sandbox Mode — No real Pi will be charged yet",
-    petition: "Egypt Crypto Regulation Petition (Demo)",
-    governance: "Governance & Petitions",
-    treasury: "Treasury (Demo — transparent tracking)",
-    map: "Alexandria (Community map — demo)",
-    badges: "Pioneer Badges",
-    sign: "Sign petition — 5 Pi demo",
-    submit: "Simulate 5 Pi payment",
-    screenshots: "Pi Console screenshot previews",
-    screen1: "Home — civic services and the Alexandria demo map at a glance.",
-    screen2: "Petition — 5 Pi fee clearly marked Sandbox; no real charge.",
-    screen3: "Community — demo governance, treasury tracking, and pioneer badges.",
-    foot: "Built in Alexandria, Egypt for Pi Next Hackathon 2026",
-    connected: "Welcome",
-    unavailable: "Open this site in Pi Browser to sign in with Pi.",
-    paymentDone: "Sandbox payment simulated — no real Pi transaction was created.",
-    paymentError: "Could not simulate payment. Please try again.",
-    loading: "Preparing…",
-  },
-}
+const proposals = [
+  { id: "lights", title: "Community-led street lighting priorities", ar: "أولويات إنارة الشوارع بمشاركة المجتمع", votes: 28 },
+  { id: "traffic", title: "Safer pedestrian crossings near community services", ar: "معابر مشاة أكثر أماناً قرب الخدمات المجتمعية", votes: 19 },
+  { id: "reports", title: "A simple way to report neighborhood issues", ar: "طريقة بسيطة للإبلاغ عن مشكلات الحي", votes: 14 },
+]
+const districts = [
+  { icon: "⌂", en: "Governance District", ar: "حيّ الحوكمة", description: "Community proposals, discussion and demo voting." },
+  { icon: "◎", en: "Treasury District", ar: "حيّ الخزينة", description: "An open concept for transparent public-interest tracking." },
+  { icon: "✳", en: "Services District", ar: "حيّ الخدمات", description: "Ideas for traffic, lighting and neighborhood reports." },
+  { icon: "✦", en: "Pioneer Hub", ar: "ملتقى الرواد", description: "A place to learn, contribute and shape the vision." },
+]
+const phases = [
+  ["01", "Community Building", "Now"],
+  ["02", "Petitions & Voting", "Demo experience"],
+  ["03", "Pilot Partnership Study", "Alexandria"],
+  ["04", "Real Smart Services", "Future phase"],
+]
 
-export default function SmartCityApp() {
+export default function SmartCityHome() {
   const [language, setLanguage] = useState<Language>("ar")
-  const [piUser, setPiUser] = useState<PiUser | null>(null)
-  const [sdkReady, setSdkReady] = useState(false)
-  const [busy, setBusy] = useState(false)
+  const [username, setUsername] = useState("")
   const [notice, setNotice] = useState("")
-  const t = copy[language]
-
-  useEffect(() => {
-    if (window.Pi) {
-      try {
-        window.Pi.init({ version: "2.0", sandbox: true })
-        setSdkReady(true)
-      } catch {
-        setSdkReady(false)
-      }
-      return
-    }
-    const timer = window.setInterval(() => {
-      if (!window.Pi) return
-      try {
-        window.Pi.init({ version: "2.0", sandbox: true })
-        setSdkReady(true)
-      } catch {
-        setSdkReady(false)
-      }
-      window.clearInterval(timer)
-    }, 250)
-    return () => window.clearInterval(timer)
-  }, [])
+  const [busy, setBusy] = useState(false)
+  const [votes, setVotes] = useState<Record<string, string>>({})
+  const [question, setQuestion] = useState("")
+  const [answer, setAnswer] = useState("")
+  const ar = language === "ar"
 
   async function signIn() {
-    setNotice("")
-    if (!isPiBrowserAvailable() || !sdkReady || !window.Pi) {
-      setNotice(t.unavailable)
-      return
-    }
-    setBusy(true)
+    if (!window.Pi) { setNotice(ar ? "للدخول عبر Pi، افتح التطبيق في Pi Browser." : "Open this demo in Pi Browser to sign in with Pi."); return }
     try {
+      window.Pi.init({ version: "2.0", sandbox: true })
       const result = await window.Pi.authenticate(["username"], () => undefined)
-      setPiUser(result.user)
+      setUsername(result.user.username)
+      setNotice(ar ? "تم تسجيل الدخول عبر Pi." : "Signed in with Pi.")
     } catch {
-      setNotice(t.unavailable)
-    } finally {
-      setBusy(false)
+      setNotice(ar ? "تعذر تسجيل الدخول. حاول مجدداً داخل Pi Browser." : "Pi sign-in was not completed. Try again in Pi Browser.")
     }
   }
 
-  async function simulatePayment() {
+  async function supportVision() {
     setBusy(true)
     setNotice("")
     try {
-      await createPetitionPayment(piUser?.uid ?? "demo-visitor")
-      setNotice(t.paymentDone)
+      const payment = await createPetitionPayment(username || "demo-visitor")
+      const key = "elmahrosa-demo-pioneers"
+      const next = Number(window.localStorage.getItem(key) || "0") + 1
+      window.localStorage.setItem(key, String(next))
+      setNotice(`${ar ? "رائد تجريبي" : "Demo Pioneer"} #${String(next).padStart(3, "0")} — ${ar ? "رؤية مدينة الإسكندرية الذكية" : "Alexandria Smart City Vision"}. ${payment.memo}`)
     } catch {
-      setNotice(t.paymentError)
-    } finally {
-      setBusy(false)
-    }
+      setNotice(ar ? "تعذرت محاكاة الدعم. حاول مجدداً." : "Sandbox simulation failed. Please try again.")
+    } finally { setBusy(false) }
   }
 
   return (
-    <main className="app-shell" dir={language === "ar" ? "rtl" : "ltr"}>
+    <main className="site-shell" dir={ar ? "rtl" : "ltr"}>
       <header className="topbar">
-        <a className="brand" href="#home" aria-label="Elmahrosa Smart City home">
-          <span className="brand-mark" aria-hidden="true">م</span>
-          <span><strong>Elmahrosa Smart City</strong><small>Alexandria · Egypt</small></span>
-        </a>
-        <div className="top-actions">
-          <button className="language-toggle" onClick={() => setLanguage(language === "ar" ? "en" : "ar")}>
-            {language === "ar" ? "English" : "العربية"}
-          </button>
-          <button className="button button-gold" onClick={signIn} disabled={busy}>
-            {piUser ? `${t.connected} @${piUser.username}` : t.login}
-          </button>
-        </div>
+        <a className="brand" href="#home" aria-label="Elmahrosa Smart City"><span className="brand-mark">م</span><span><strong>Elmahrosa Smart City</strong><small>Alexandria · Egypt</small></span></a>
+        <nav className="desktop-nav"><a href="#vision">{ar ? "الرؤية" : "Vision"}</a><a href="#districts">{ar ? "الأحياء" : "Districts"}</a><a href="#community">{ar ? "المجتمع" : "Community"}</a><a href="#treasury">{ar ? "الخزينة" : "Treasury"}</a></nav>
+        <div className="top-actions"><button className="language-toggle" onClick={() => setLanguage(ar ? "en" : "ar")}>{ar ? "English" : "العربية"}</button><button className="button button-outline" onClick={signIn}>{username ? `@${username}` : (ar ? "الدخول عبر Pi" : "Sign in with Pi")}</button></div>
       </header>
 
+      <div className="sandbox-banner">ⓘ &nbsp;{ar ? "بيانات تجريبية لمسابقة Pi Next Hackathon · وضع Sandbox — لا يتم خصم Pi حقيقي" : "Demo Data for Pi Next Hackathon · Sandbox Mode — No real Pi charged"}</div>
       <section id="home" className="hero">
-        <div className="hero-copy">
-          <span className="eyebrow"><span class="live-dot" /> PI NEXT HACKATHON 2026</span>
-          <h1>Elmahrosa<br /><em>Smart City</em></h1>
-          <p>{t.tagline}</p>
-          <div className="hero-actions">
-            <a className="button button-gold" href="#petition">{t.sign} <span aria-hidden="true">↗</span></a>
-            <span className="demo-chip">{t.demo}</span>
-          </div>
+        <div className="hero-copy"><span className="eyebrow"><i className="live-dot" /> PI NEXT HACKATHON 2026 · ALEXANDRIA</span>
+          <h1>{ar ? <>أول مدينة ذكية مصرية<br /><em>على Pi تبدأ من إسكندرية</em></> : <>Egypt’s first Pi-powered<br /><em>civic smart city vision</em></>}</h1>
+          <p>{ar ? "رؤية مدنية يقودها المجتمع في الإسكندرية. فكرة مفتوحة للتعلّم والتعاون — وليست مشروعاً عقارياً أو استثمارياً." : "A community-built civic smart city concept in Alexandria. An open vision for learning and collaboration—not a property or investment offering."}</p>
+          <div className="hero-actions"><a className="button button-gold" href="#vision">{ar ? "اكتشف الرؤية" : "Explore the vision"} <span>↙</span></a><span className="demo-chip">{ar ? "مفهوم مجتمعي · بيانات تجريبية" : "Concept & Community Vision"}</span></div>
         </div>
-        <div className="city-art" aria-label="Illustration of Alexandria city at dusk" role="img">
-          <div className="sun" />
-          <div className="skyline skyline-back"><i /><i /><i /><i /><i /></div>
-          <div className="skyline skyline-front"><i /><i /><i /><i /><i /><i /></div>
-          <div className="coastline" />
-          <div className="map-pin pin-one">●</div><div className="map-pin pin-two">●</div><div className="map-pin pin-three">●</div>
-          <span className="art-caption">31.2001° N · 29.9187° E</span>
+        <div className="city-art" role="img" aria-label={ar ? "تصور توضيحي تجريبي لمدينة الإسكندرية" : "Illustrative demo concept map of Alexandria"}>
+          <div className="map-grid"/><div className="map-water"/><div className="map-road road-one"/><div className="map-road road-two"/><div className="map-road road-three"/>
+          <div className="map-label label-one">GOVERNANCE</div><div className="map-label label-two">SERVICES</div><div className="map-label label-three">PIONEER HUB</div><span className="map-caption">ALEXANDRIA · CONCEPT MAP · DEMO</span>
         </div>
       </section>
 
-      <div className="sandbox-banner"><span>ⓘ</span> {t.sandbox}</div>
-      {!sdkReady && <p className="browser-hint">{t.browser}</p>}
       {notice && <div className="notice" role="status">{notice}</div>}
-
-      <section className="content-section">
-        <div className="section-heading"><div><span className="eyebrow">A CIVIC DEMO</span><h2>{language === "ar" ? "مدينة أفضل تبدأ بالمشاركة" : "Better cities start with participation"}</h2></div><span className="demo-chip">{t.demo}</span></div>
-        <div className="feature-grid">
-          <article className="feature-card feature-primary"><div className="feature-icon">✍</div><span className="card-kicker">01 / PETITIONS</span><h3>{t.petition}</h3><p>{language === "ar" ? "استكشف نموذجاً توضيحياً للمشاركة المدنية. البيانات والأرقام المعروضة تجريبية." : "Explore a civic participation demo. Displayed figures and activity are demo data."}</p><a href="#petition" className="text-link">{language === "ar" ? "استكشف العريضة" : "Explore petition"} ↗</a></article>
-          <article className="feature-card"><div className="feature-icon">◈</div><span className="card-kicker">02 / COMMUNITY</span><h3>{t.governance}</h3><p>{language === "ar" ? "مساحة تجريبية لمقترحات المجتمع ومناقشاته." : "A demo space for community proposals and discussion."}</p></article>
-          <article className="feature-card"><div className="feature-icon">◎</div><span className="card-kicker">03 / TRANSPARENCY</span><h3>{t.treasury}</h3><p>{language === "ar" ? "واجهة توضيحية للتتبع؛ لا توجد أموال أو أرصدة فعلية معروضة." : "An illustrative tracking interface; no real funds or balances are shown."}</p></article>
-          <article className="feature-card"><div className="feature-icon">⌖</div><span className="card-kicker">04 / ALEXANDRIA</span><h3>{t.map}</h3><p>{language === "ar" ? "تصور مجتمعي تجريبي، وليس خريطة حية أو بيانات بلدية رسمية." : "A community demo concept, not a live map or official municipal data."}</p></article>
-          <article className="feature-card"><div className="feature-icon">✦</div><span className="card-kicker">05 / CONTRIBUTION</span><h3>{t.badges}</h3><p>{language === "ar" ? "شارات تجريبية للاكتشاف والمشاركة المدنية." : "Demo badges for discovery and civic participation."}</p></article>
-        </div>
+      <section id="vision" className="section vision-section"><div className="section-heading"><div><span className="eyebrow">ALEXANDRIA · COMMUNITY FIRST</span><h2>{ar ? "مدينة أفضل تبدأ بفكرة مشتركة" : "A better city begins with shared ideas"}</h2></div><p>{ar ? "تصور رقمي للأحياء والخدمات المدنية — كل الخرائط والتصويتات والأرقام هنا تجريبية." : "A digital concept for civic districts and services. Maps, votes and figures shown here are demo data."}</p></div>
+        <div className="district-grid" id="districts">{districts.map((district) => <article className="district-card" key={district.en}><span className="district-icon">{district.icon}</span><span className="card-kicker">CONCEPT DISTRICT</span><h3>{ar ? district.ar : district.en}</h3><p>{district.description}</p></article>)}</div>
+        <div className="land-note">{ar ? "دراسة شراكة الأراضي قيد البحث — لا يوجد بيع أراضٍ أو حصص أو وعود بعائد." : "Land partnership under study — No land sale, shares, or promises of returns."}</div>
       </section>
 
-      <section id="petition" className="petition-panel">
-        <div><span className="eyebrow">TESTNET SANDBOX CHECKOUT</span><h2>{t.petition}</h2><p>{language === "ar" ? "رسوم نموذجية قدرها 5 Pi لأغراض العرض فقط. الزر يحاكي الدفع محلياً ولا يستدعي معاملة حقيقية." : "A 5 Pi sample fee for demonstration only. This button simulates payment locally and does not create a real transaction."}</p><strong className="sandbox-label">{t.sandbox}</strong></div>
-        <button className="button button-gold payment-button" onClick={simulatePayment} disabled={busy}>{busy ? t.loading : t.submit} <span aria-hidden="true">→</span></button>
+      <section className="section timeline-section"><div className="section-heading"><div><span className="eyebrow">A VISION, BUILT STEP BY STEP</span><h2>{ar ? "مسار واقعي يبدأ بالمجتمع" : "A practical path, starting with community"}</h2></div></div><div className="timeline-grid">{phases.map(([number, title, detail], i) => <article className="phase-card" key={number}><span className="phase-number">{number}</span><span className="phase-status">{i === 0 ? (ar ? "جارٍ الآن" : "CURRENT FOCUS") : (ar ? "مرحلة تصورية" : "VISION PHASE")}</span><h3>{ar && i === 0 ? "بناء المجتمع" : ar && i === 1 ? "العرائض والتصويت" : ar && i === 2 ? "دراسة شراكة تجريبية" : ar && i === 3 ? "خدمات ذكية حقيقية" : title}</h3><p>{detail}</p></article>)}</div></section>
+
+      <section id="community" className="section community-section"><div className="section-heading"><div><span className="eyebrow">COMMUNITY LAB · DEMO VOTING</span><h2>{ar ? "أفكار المجتمع وتصويت تجريبي" : "Community proposals & demo voting"}</h2></div><span className="demo-chip">{ar ? "بيانات تجريبية لمسابقة Pi Next Hackathon" : "Demo Data for Pi Next Hackathon"}</span></div>
+        <div className="proposal-list">{proposals.map((proposal) => <article className="proposal-card" key={proposal.id}><div><span className="proposal-tag">{ar ? "خدمات مدنية" : "CIVIC SERVICES"}</span><h3>{ar ? proposal.ar : proposal.title}</h3><small>{ar ? "أصوات توضيحية فقط" : "Illustrative demo votes only"}</small></div><div className="vote-actions"><span className="vote-count">{proposal.votes + (votes[proposal.id] ? 1 : 0)} <small>{ar ? "صوتاً تجريبياً" : "demo votes"}</small></span><button className="button button-outline" disabled={!!votes[proposal.id]} onClick={() => setVotes({ ...votes, [proposal.id]: "yes" })}>{votes[proposal.id] ? (ar ? "تم التصويت" : "Voted") : (ar ? "صوّت تجريبياً" : "Vote (demo)")}</button></div></article>)}</div>
+        <div className="assistant-card"><div><span className="eyebrow">AI PROPOSAL ASSISTANT · DEMO</span><h3>{ar ? "حوّل فكرتك إلى مقترح مدني" : "Shape an idea into a civic proposal"}</h3><p>{ar ? "مساعد توضيحي يعمل محلياً — لا يرسل بياناتك إلى خدمة ذكاء اصطناعي." : "A simple local demo helper—your text is not sent to an AI service."}</p></div><form onSubmit={(event) => { event.preventDefault(); if (question.trim()) setAnswer(ar ? `مقترح تجريبي: ${question.trim()} — ابدأ بمشكلة واضحة، وخطوة صغيرة، وطريقة لمشاركة المجتمع.` : `Demo proposal: ${question.trim()} — define the need, suggest a small first step, and invite community feedback.`) }}><input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder={ar ? "اكتب فكرة للحي..." : "Describe a neighborhood idea…"} aria-label="Proposal idea"/><button className="button button-gold">{ar ? "صياغة" : "Shape idea"}</button></form>{answer && <p className="assistant-answer" role="status">{answer}</p>}</div>
+        <div className="leaderboard"><div><span className="eyebrow">ALEXANDRIA PIONEERS</span><h3>{ar ? "مجتمع الرواد" : "Pioneer community"}</h3><p>{ar ? "قائمة تجريبية — لا يوجد ترتيب أو عدد أعضاء حقيقي." : "Demo leaderboard concept—no real ranking or member count is represented."}</p></div><span className="leaderboard-mark">01—100<br/><small>DEMO LIST CONCEPT</small></span></div>
       </section>
 
-      <section className="content-section screenshots-section">
-        <div className="section-heading"><div><span className="eyebrow">SUBMISSION ASSETS</span><h2>{t.screenshots}</h2></div></div>
-        <div className="screenshots-grid">
-          <Screenshot number="01" title={language === "ar" ? "مدينة الإسكندرية" : "Alexandria city"} description={t.screen1} variant="map" />
-          <Screenshot number="02" title={language === "ar" ? "مشاركة مدنية" : "Civic participation"} description={t.screen2} variant="petition" />
-          <Screenshot number="03" title={language === "ar" ? "مجتمع الرواد" : "Pioneer community"} description={t.screen3} variant="community" />
-        </div>
-      </section>
-      <footer><span className="brand-mark small">م</span><span>{t.foot}</span><span className="footer-demo">DEMO · SANDBOX</span></footer>
+      <section id="treasury" className="section treasury-section"><div className="treasury-card"><div><span className="eyebrow">TRANSPARENCY CONCEPT</span><h2>{ar ? "الخزينة — لوحة توضيحية" : "Treasury — transparent demo dashboard"}</h2><p>{ar ? "لا توجد أموال حقيقية أو معاملات Pi أو بيانات خزينة فعلية معروضة. الأرقام غير متاحة لأنها ليست بيانات حقيقية." : "No real funds, Pi transactions or treasury records are shown. Real figures are intentionally not displayed."}</p></div><span className="treasury-stamp">DEMO<br/>ONLY</span></div></section>
+
+      <section id="petition" className="section petition-section"><div className="petition-card"><div><span className="eyebrow">TESTNET SANDBOX · SIMULATION ONLY</span><h2>{ar ? "عريضة تنظيم العملات الرقمية في مصر" : "Egypt Crypto Regulation Petition"} <span className="demo-chip">{ar ? "تجريبية" : "Demo"}</span></h2><p>{ar ? "محاكاة تفاعلية لتوضيح تدفق Pi. لا يتم إنشاء دفعة أو معاملة فعلية؛ لا تستخدم أموالاً حقيقية." : "A UI simulation to illustrate a Pi flow. It does not create a real payment or transaction. No real Pi is charged."}</p><p className="free-badge">✦ &nbsp;{ar ? "احجز شارة رائد — مجاناً" : "Reserve a Pioneer Badge — Free"}</p></div><button className="button button-gold payment-button" onClick={supportVision} disabled={busy}>{busy ? (ar ? "جارٍ التحضير…" : "Preparing…") : (ar ? "محاكاة دعم تجريبي بقيمة 5 Pi" : "Simulate 5 Pi petition support")}</button></div><p className="no-returns">{ar ? "لا توجد أرض للبيع أو وعود بأرباح أو عوائد." : "No land is for sale. No profits or returns are promised."}</p></section>
+
+      <footer><span className="brand-mark small">م</span><span>{ar ? "صُنع في الإسكندرية، مصر من أجل Pi Next Hackathon 2026" : "Built in Alexandria, Egypt for Pi Next Hackathon 2026"}</span><span className="footer-demo">DEMO · SANDBOX</span></footer>
     </main>
   )
-}
-
-function Screenshot({ number, title, description, variant }: { number: string; title: string; description: string; variant: string }) {
-  return <article className="screenshot-card"><div className={`screenshot-preview ${variant}`}><div className="preview-top"><span className="preview-logo">م</span><span>ELMAHROSA</span><span className="preview-pill">DEMO</span></div><div className="preview-title">{title}</div><div className="preview-lines"><i /><i /><i /></div><div className="preview-bottom"><span>PI · SANDBOX</span><span>✦ &nbsp; ◈ &nbsp; ⌖</span></div></div><div className="screenshot-caption"><span>{number}</span><p>{description}</p></div></article>
 }

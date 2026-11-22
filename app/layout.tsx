@@ -4,28 +4,25 @@ import type React from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Elmahrosa Smart City | Pi Next Hackathon 2026",
-  description:
-    "Egypt's first Pi-powered civic platform. Report, sign, and build your city transparently. Demo experience for Pi Next Hackathon 2026.",
+  title: "Elmahrosa Smart City | Alexandria Civic Vision",
+  description: "A community-built civic smart city concept in Alexandria, Egypt. Demo experience for Pi Next Hackathon 2026; no land sale or investment offer.",
   applicationName: "Elmahrosa Smart City",
+  metadataBase: new URL("https://teos-pi-smart-city.vercel.app"),
   openGraph: {
-    title: "Elmahrosa Smart City",
-    description: "Report, sign, and build your city transparently.",
+    title: "Elmahrosa Smart City — Alexandria Civic Vision",
+    description: "A community-led civic concept for Alexandria. Clearly labeled demo and sandbox experience.",
     type: "website",
+    images: ["/icon.svg"],
   },
+  twitter: { card: "summary", title: "Elmahrosa Smart City", description: "Alexandria civic vision · Demo & sandbox" },
+  icons: { icon: "/icon.svg" },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ar" dir="rtl">
-      <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <meta name="theme-color" content="#071322" />
-      </head>
-      <body>
-        <Script src="https://sdk.minepi.com/pi-sdk.js" strategy="beforeInteractive" />
-        {children}
-      </body>
+      <head><meta name="theme-color" content="#071322" /></head>
+      <body><Script src="https://sdk.minepi.com/pi-sdk.js" strategy="beforeInteractive" />{children}</body>
     </html>
   )
 }
