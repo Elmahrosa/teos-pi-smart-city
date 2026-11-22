@@ -1,51 +1,38 @@
-﻿![TEOS Sovereign Standing](https://img.shields.io/badge/Standing-Sovereign%20Original%20%E2%80%94%20Elmahrosa%20International-blue?style=for-the-badge)
-[![License: TESL](https://img.shields.io/badge/License-TESL%20%2B%20PolyForm%20Noncommercial-green?style=for-the-badge)](https://github.com/Elmahrosa/Teos-Pharaoh-Portal/blob/main/TESL.md)
+# Elmahrosa Smart City
 
-## 🏛️ Constitutional Authority
+Egypt's first Pi-powered civic platform. Report, sign, and build your city transparently.
 
-This repository derives its authority from the
-**International Civic Blockchain Constitution (ICBC)**:
+## Demo and sandbox disclosure
 
-https://github.com/Elmahrosa/International-Civic-Blockchain-Constitution
+All figures and activity are **Demo data for Pi Next Hackathon**. The 5 Pi petition fee uses TESTNET SANDBOX simulation only. **Sandbox Mode — No real Pi will be charged yet**. The checkout does not call Pi.createPayment and cannot create a real Pi transaction.
 
-Any implementation or use must comply with ICBC and TESL.
+## Run locally
 
+```bash
+npm install
+npm run dev
+npm run build
+npm start
+```
 
-# 📍 Repo Standing Statement
+## Deploy to Vercel
 
-This repository is a **sovereign original** under **Elmahrosa International — TEOS Egypt**.  
-Governance is anchored in [TEOS-FORGE](https://github.com/Elmahrosa/TEOS-FORGE).  
-Commercial use requires written approval from Elmahrosa International.  
+Import this GitHub repository in Vercel, keep the Next.js defaults, and deploy from `main`. No environment variables or database are required for the demo.
 
-⚖️ Protected under dual license: PolyForm Noncommercial + TEOS Egypt Sovereign License (TESL).
+## Pi Browser
 
-md)
+The app loads `https://sdk.minepi.com/pi-sdk.js`, initializes Pi with `sandbox: true`, and requests only the `username` scope. Outside Pi Browser it stays usable and shows the Pi Browser guidance.
 
-> Copyright © 2025 Elmahrosa International. All Rights Reserved.  
-> This material is NOT open source and is protected by the TEOS Egypt Sovereign License (TESL).  
-> For the full license text, see [TEOS Egypt Sovereign License (TESL)](https://github.com/Elmahrosa/Teos-Pharaoh-Portal/blob/main/TESL.md).
-> 
-> **Initial Author:** Elmahrosa International  
-> **Governing law and venue:** Cairo, Arab Republic of Egypt.
+Before real Testnet or Mainnet transactions: register the app in the Pi Developer Portal, implement server-side approval/completion endpoints, keep app credentials on the server, and never place secrets or wallet credentials in client code.
 
-This commit adds missing scaffolding to enable:
- - IoT ingestion layer (MQTT → Postgres)
- - Pi AI microservices (basic classifier + alerts)
- - Badge automation (earned_badges.py)
- - UTF-8 safe SQL schema and emoji-safe restore script
- - Docker compose for local reproduction
+## Pi Console submission
 
-Files added:
-- /iot: sensors.py, mqtt_listener.py, exporter.py
-- /ai: classifier.py, alerts.py, thresholds.json
-- /scripts: earned_badges.py
-- schema.sql, patch-restore-emojis.sql
-- Dockerfiles and docker-compose.yml
+- App name: Elmahrosa Smart City
+- Category: Utilities / Civic
+- Short description: A Pi-powered civic demo to report, sign, and build a better city.
+- Long description: Alexandria-inspired civic participation demo for petitions, governance, transparent tracking, community mapping, and pioneer badges. The 5 Pi petition action is a clearly labeled Testnet sandbox simulation and does not charge Pi. All content is demo data for Pi Next Hackathon 2026.
+- Screenshot 1: Home view with the Alexandria-inspired illustration and demo label.
+- Screenshot 2: Petition view with 5 Pi sandbox disclosure.
+- Screenshot 3: Governance, treasury, community map, and pioneer badge cards.
 
-See STRUCTURE.md for details and quick start.
-
-## 🔗 Integration Summary
-This repository is part of the **Elmahrosa Sovereign Stack**.  
-Governance is anchored in **TEOS-FORGE**, with integrations across Bankchain, ERT-LAUNCH, FPBE, and other civic modules.  
-See full details in [docs/integrations.md](https://github.com/Elmahrosa/TEOS-FORGE/blob/main/docs/integrations.md).
-
+Footer: Built in Alexandria, Egypt for Pi Next Hackathon 2026.
