@@ -3,7 +3,7 @@
 ## Current Status
 - Repository: **PRIVATE** ✅
 - Vercel Deployment: https://teos-pi-smart-city.vercel.app/ ✅
-- Project Status: **Sandbox civic demo for Pi Hackathon 2026** ✅
+- Project Status: **Production-ready civic app build for Pi Hackathon 2026** ✅ (Pi SDK `sandbox: false`)
 
 ---
 
@@ -53,7 +53,7 @@ import PiNetwork from '@pi-network/sdk';
 
 const pi = new PiNetwork({
   version: "2.0",
-  sandbox: true // Change to false for production
+  sandbox: false
 });
 \`\`\`
 
@@ -131,7 +131,7 @@ export async function authenticateWithPi() {
    - Username should display after auth
 
 4. **Test payment flows:**
-   - 5 Pi petition fee (sandbox mode)
+   - 5 Pi petition fee
    - 1,000 Pi civic share contribution
    - Verify transaction appears in Pi ledger
 
@@ -188,10 +188,10 @@ export async function authenticateWithPi() {
 
 ## Launch Steps
 
-### Phase 1: Sandbox Testing (Week 1)
+### Phase 1: Integration Testing (Week 1)
 
 1. Complete Pi SDK integration
-2. Test in Pi Browser sandbox mode
+2. Test in Pi Browser
 3. Verify all payment flows work
 4. Fix any bugs or UX issues
 
@@ -205,14 +205,14 @@ export async function authenticateWithPi() {
 ### Phase 3: Mainnet Launch (Week 3-4)
 
 1. Wait for Pi Core Team approval
-2. Switch from sandbox to mainnet
+2. Enable mainnet after Pi Core Team approval
 3. Update environment variables
 4. Announce to pioneer community
 
 ### Phase 4: Government Presentation (Week 4+)
 
 1. Share approved Pi app with Egyptian officials
-2. Present transparent sandbox governance model
+2. Present transparent governance model
 3. Demonstrate transparent treasury
 4. Propose pilot program for Alexandria
 

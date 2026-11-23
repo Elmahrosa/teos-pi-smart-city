@@ -134,7 +134,7 @@
 
 ### Strategic Value Proposition
 
-**"We are presenting a civic-first smart city sandbox concept, powered by Pi Network. This project explores:**
+**"We are presenting a civic-first smart city concept, powered by Pi Network. This project explores:**
 
 - **Transparent governance** — Petition-first, blockchain-verified decisions
 - **Citizen ownership** — Every pioneer holds traceable civic shares
@@ -146,7 +146,7 @@
 
 ### Key Metrics for Officials
 
-- **Status:** Sandbox concept — no valuation claims
+- **Status:** Concept — no valuation claims
 - **Economic Impact:** Multi-billion dollar civic economy
 - **Pioneer Participation:** Decentralized, globally accessible
 - **Compliance:** Egyptian law jurisdiction, Alexandria venue

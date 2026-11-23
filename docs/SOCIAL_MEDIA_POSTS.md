@@ -58,7 +58,7 @@ One tap = your voice in Egypt's digital future.
 
 🔥 WHAT'S AT STAKE:
 • 117 acres of prime downtown Alexandria land
-• Sandbox civic demo for Pi Hackathon 2026
+• Production-ready civic app build for Pi Hackathon 2026
 • World's first Pi-governed smart city
 • Legal framework for ALL Egyptian pioneers
 
@@ -89,7 +89,7 @@ Today marks a critical milestone: our petition for comprehensive digital currenc
 📊 Why This Matters:
 • 60M+ Pi Network pioneers globally
 • Growing Egyptian Web3 community
-• Sandbox smart city civic project awaiting legal clarity
+• Smart city civic project awaiting legal clarity
 • 117-acre downtown Alexandria development ready for deployment
 
 🎯 Current Status: 385/500 signatures
@@ -127,7 +127,7 @@ We just launched something huge inside Teos & Pi Smart City app:
 
 Why this matters:
 🏛️ 117 acres downtown Alexandria
-🏙️ Sandbox smart city civic project
+🏙️ Smart city civic project
 🇪🇬 Egypt's first blockchain-governed city
 📜 Needs legal framework to launch
 

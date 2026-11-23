@@ -47,7 +47,7 @@ console.log('Payment created:', payment.identifier)
 \`\`\`typescript
 import { createCivicSharePayment } from '@/lib/pi-payments'
 
-// Example: civic share payment (sandbox only — no real Pi charged)
+// Example: civic share payment (requires Pi Browser and approved server-side handlers)
 const payment = await createCivicSharePayment(userId, 1)
 console.log('Civic share payment:', payment)
 \`\`\`
@@ -73,7 +73,7 @@ Deploy to Vercel and open in Pi Browser:
 No Pi-specific environment variables needed for basic functionality. Optional:
 
 \`\`\`env
-NEXT_PUBLIC_PI_SANDBOX=true  # For sandbox testing
+NEXT_PUBLIC_PI_SANDBOX=false  # Production build
 NEXT_PUBLIC_PI_APP_ID=teospi-smart-city-elmahrosa
 \`\`\`
 

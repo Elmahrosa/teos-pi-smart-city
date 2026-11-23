@@ -17,7 +17,7 @@ Teos&Pi Smart City Elmahrosa represents a **$2.0B–$3.2B USD civic infrastructu
 ### Land & Location
 - **Site:** Alexandria, Egypt (concept location — under study)
 - **Zones:** San Stefano, Corniche, or Attarin districts
-- **Status:** Sandbox civic concept — no land sale or valuation claims
+- **Status:** Civic concept — no land sale or valuation claims
 
 ### Smart City Components
 - Educational facilities (schools, universities)
