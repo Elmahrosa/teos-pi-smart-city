@@ -1,0 +1,5 @@
+Serve a plain-text file at https://teos-pi-smart-city.vercel.app/validation-key.txt whose entire content is:
+
+7e9a465444dbd24654cec4ddb588cda0ff7ed8d42bf165d03b388b453b09b2420b419fa42b389b45f6219c1b6a63ff915c6d9efe9cb5a9cdf15ca2d6974fab50
+
+Then redeploy the app so Pi can verify that I own this domain.
